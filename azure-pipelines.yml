@@ -17,7 +17,7 @@ variables:
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
-  vmImageName: Teja
+  #vmImageName: Teja
 
 stages:
 - stage: Build
@@ -28,7 +28,7 @@ stages:
     strategy:
       parallel: 1
     pool:
-      vmImage: $(vmImageName)
+      vmImage: TEJA
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
