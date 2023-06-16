@@ -105,6 +105,5 @@ print("Recall:", recall_score(y_test, y_test_preds))
 print("F1:", f1_score(y_test, y_test_preds))
 print("AUC:", roc_auc_score(y_test, y_test_preds))
 
-p
 joblib.dump(svm_clf, 'fraud_score.pkl')
 print("model saved")
