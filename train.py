@@ -51,20 +51,25 @@ all_labels = untagged_df_clean["transactionID"].isin(fraud_df_clean["transaction
 all_transactions = untagged_df_clean
 
 
-
+# preprocessing
 numeric_features=["transactionAmountUSD", "transactionDate", "transactionTime", "localHour", 
                   "transactionIPaddress", "digitalItemCount", "physicalItemCount"]
 
 categorical_features=["transactionCurrencyCode", "browserLanguage", "paymentInstrumentType", "cardType", "cvvVerifyResult"]                           
 
-numeric_transformer = Pipeline(steps=[
+# pre-process numeruc transformer pipeline
+numeric_transformer = Pipeline(
+    steps=[
     ('cleaner', NumericCleaner()),
     ('scaler', StandardScaler())
-])
-                               
-categorical_transformer = Pipeline(steps=[
+    ])
+ 
+# pre-process categorical transformer pipeline                              
+categorical_transformer = Pipeline(
+    steps=[
     ('cleaner', CategoricalCleaner()),
-    ('onehot', OneHotEncoder(handle_unknown='ignore'))])
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+    ])
 
 preprocessor = ColumnTransformer(
     transformers=[
@@ -74,7 +79,7 @@ preprocessor = ColumnTransformer(
 
 preprocessed_result = preprocessor.fit_transform(all_transactions)
 
-
+# balancing the samples
 only_fraud_samples = all_transactions.loc[all_labels == True]
 only_fraud_samples["label"] = True
 only_non_fraud_samples = all_transactions.loc[all_labels == False]
@@ -86,17 +91,21 @@ balanced_transactions = pd.concat([random_non_fraud_samples, only_fraud_samples]
 balanced_labels = balanced_transactions["label"]
 del balanced_transactions["label"]
 
+# train test split
 X_train, X_test, y_train, y_test = train_test_split(balanced_transactions, balanced_labels, 
                                                     test_size=0.2, random_state=42)
 
 
-
+# pipeline
 svm_clf = Pipeline((
     ("preprocess", preprocessor),
     ("linear_svc", LinearSVC(C=1, loss="hinge"))
 ))
+
 svm_clf.fit(X_train, y_train)
 y_test_preds = svm_clf.predict(X_test)
+
+#metrics
 print(confusion_matrix(y_test, y_test_preds))
 print(accuracy_score(y_test, y_test_preds))
 print("Accuracy:", accuracy_score(y_test, y_test_preds))
@@ -105,5 +114,6 @@ print("Recall:", recall_score(y_test, y_test_preds))
 print("F1:", f1_score(y_test, y_test_preds))
 print("AUC:", roc_auc_score(y_test, y_test_preds))
 
+# saving the model
 joblib.dump(svm_clf, 'fraud_score.pkl')
 print("model saved")
