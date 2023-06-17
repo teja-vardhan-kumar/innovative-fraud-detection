@@ -2,18 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: model
+  labels:
+    app: model
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: model-canary
+      app: model
   template:
     metadata:
       labels:
-        app: model-canary
+        app: model
     spec:
       containers:
-        - name: model-canary
+        - name: model
           image: innovativefrauddetection.azurecr.io/frauddetectionfast:latest
           ports:
           - containerPort: 80
