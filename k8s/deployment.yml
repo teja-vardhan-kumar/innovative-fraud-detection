@@ -1,4 +1,4 @@
-apiVersion: appas/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: model
@@ -6,7 +6,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app:model
+      app: model
   template:
     metadata:
       labels:
