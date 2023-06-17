@@ -6,14 +6,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: model
+      app: model-canary
   template:
     metadata:
       labels:
-        app: model
+        app: model-canary
     spec:
       containers:
-        - name: model
-          image: innovativefrauddetection.azurecr.io/frauddetectionfast:13
+        - name: model-canary
+          image: innovativefrauddetection.azurecr.io/frauddetectionfast:latest
           ports:
           - containerPort: 80

@@ -8,4 +8,4 @@ spec:
     - port: 80
       targetPort: 5000
   selector:
-    app: model
+    app: model-canary
