@@ -16,6 +16,7 @@ app = Flask(__name__)
 LOG = create_logger(app)
 LOG.setLevel(logging.INFO)
 
+# loading pickle file
 clf = joblib.load("fraud_score.pkl")
 
 
