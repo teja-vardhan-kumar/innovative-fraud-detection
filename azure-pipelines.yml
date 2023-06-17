@@ -40,8 +40,9 @@ stages:
         tags: |
           $(tag)
     
+
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.SourcesDirectory)/artifacts'
-        ArtifactName: 'model'
+        PathtoPublish: '$(Build.SourcesDirectory)/k8s'
+        ArtifactName: 'k8s-artifact'
         publishLocation: 'Container'
