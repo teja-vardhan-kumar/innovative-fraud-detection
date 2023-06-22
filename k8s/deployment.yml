@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: model
-          image: innovativefrauddetection.azurecr.io/frauddetectionfast:latest
+          image: fdcontainerregistry1.azurecr.io/fd-ml-image-fast:latest
           ports:
           - containerPort: 80
