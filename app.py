@@ -17,12 +17,12 @@ LOG = create_logger(app)
 LOG.setLevel(logging.INFO)
 
 # loading pickle file
-clf = joblib.load("fraud_score.pkl")
+clf = joblib.load("./databricks/fraud_score.pkl")
 
 
 @app.route("/")
 def home():
-    html = "<h3>Sklearn Prediction Home</h3>"
+    html = "<h3>Fraud Detection Home</h3>"
     return html.format(format)
 
 @app.route("/predict", methods=['POST'])

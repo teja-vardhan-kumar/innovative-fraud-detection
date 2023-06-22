@@ -12,7 +12,7 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'cbc99fbf-4fe2-4df9-9ffa-9178c66bad35'
   imageRepository: 'frauddetectionfast'
-  containerRegistry: 'innovativefrauddetection.azurecr.io'
+  containerRegistry: 'fdcontainerregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   #tag: '$(Build.BuildId)'
   tag: 'latest'
