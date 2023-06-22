@@ -8,18 +8,6 @@ trigger:
 resources:
 - repo: self
 
-variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'cbc99fbf-4fe2-4df9-9ffa-9178c66bad35'
-  imageRepository: 'frauddetectionfast'
-  containerRegistry: 'fdcontainerregistry.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  #tag: '$(Build.BuildId)'
-  tag: 'latest'
-
-  # Agent VM image name
-  #vmImageName: Teja
-
 stages:
 - stage: Build
   displayName: Build and push stage
@@ -32,15 +20,12 @@ stages:
       default
     steps:
     - task: Docker@2
-      displayName: Build and push an image to container registry
       inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-    
+        containerRegistry: 'fd-container-registry-sc'
+        repository: 'fd-ml-image-fast'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: 'latest'
 
     - task: PublishBuildArtifacts@1
       inputs:
