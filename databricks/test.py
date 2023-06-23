@@ -33,7 +33,7 @@ desired_cols = ['accountID',
 
 scoring_pipeline = joblib.load('fraud_score.pkl')
 
-untagged_df_fresh = pd.read_csv('./data/Untagged_Transactions.csv')[desired_cols]
+untagged_df_fresh = pd.read_csv('../data/Untagged_Transactions.csv')[desired_cols]
 
 test_pipeline_preds = scoring_pipeline.predict(untagged_df_fresh)
 

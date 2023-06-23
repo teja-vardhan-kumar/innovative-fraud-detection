@@ -17,9 +17,9 @@ else:
     import joblib
     
 
-account_df = pd.read_csv('./data/Account_Info.csv')
-fraud_df = pd.read_csv('./data/Fraud_Transactions.csv')
-untagged_df = pd.read_csv( './data/Untagged_Transactions.csv')
+account_df = pd.read_csv('../data/Account_Info.csv')
+fraud_df = pd.read_csv('../data/Fraud_Transactions.csv')
+untagged_df = pd.read_csv( '../data/Untagged_Transactions.csv')
 
 account_df_clean = account_df[["accountID", "transactionDate", "transactionTime", 
                                "accountPostalCode", "accountState", "accountCountry", 
