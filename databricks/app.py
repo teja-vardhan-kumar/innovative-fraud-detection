@@ -31,7 +31,6 @@ def home():
 def predict():
     
     json_payload = request.json
-    print(json_payload)
     LOG.info("JSON payload: %s json_payload")
     payload = pd.DataFrame(json_payload)
     LOG.info("inference payload DataFrame: %s payload")

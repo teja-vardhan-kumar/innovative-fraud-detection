@@ -50,8 +50,8 @@ class NpEncoder(json.JSONEncoder):
 
 body = str.encode(json.dumps(data, cls=NpEncoder))
 
-url = 'http://localhost:5000/predict'
-#url = 'http://20.72.157.242/predict'
+#url = 'http://localhost:5000/predict'
+url = 'http://20.237.200.127/predict'
 
 headers = {'Content-Type':'application/json'}
 
